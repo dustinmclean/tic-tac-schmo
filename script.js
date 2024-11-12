@@ -41,13 +41,19 @@ const gameBoard = (() => {
   return { setField, getField, reset };
 })();
 
-// Okay, this function runs ONCE, at the beginning of the game, spitting out three functions into
+// Okay, this previous function runs ONCE, at the beginning of the game, spitting out three functions into
 // an object... which lets you reuse them over and over, whenever you need them.
+
+// Now, the next function is a massive IIFE, setting up basically the entire game:
+
+// Start with selecting some DOM elements:
 
 const displayController = (() => {
   const fieldElements = document.querySelectorAll(".field");
   const messageElement = document.getElementById("message");
   const restartButton = document.getElementById("restart-button");
+
+  // Next, add Event Listeners to each individual Field cell:
 
   fieldElements.forEach((field) =>
     field.addEventListener("click", (e) => {
@@ -83,4 +89,67 @@ const displayController = (() => {
   };
 
   return { setResultMessage, setMessageElement };
+})();
+
+// Now another MASSIVE IIFE:
+
+const gameController = (() => {
+  const playerX = Player("X");
+  const playerO = Player("O");
+  let round = 1;
+  let isOver = false;
+
+  const playRound = (fieldIndex) => {
+    gameBoard.setField(fieldIndex, getCurrentPlayerSign());
+    if (checkWinner(fieldIndex)) {
+      displayController.setResultMessage(getCurrentPlayerSign());
+      isOver = true;
+      return;
+    }
+    if (round === 9) {
+      displayController.setResultMessage("Draw");
+      isOver = true;
+      return;
+    }
+    round++;
+    displayController.setMessageElement(
+      `Player ${getCurrentPlayerSign()}'s turn`
+    );
+  };
+
+  const getCurrentPlayerSign = () => {
+    return round % 2 === 1 ? playerX.getSign() : playerO.getSign();
+  };
+
+  const checkWinner = (fieldIndex) => {
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    return winConditions
+      .filter((combination) => combination.includes(fieldIndex))
+      .some((possibleCombination) =>
+        possibleCombination.every(
+          (index) => gameBoard.getField(index) === getCurrentPlayerSign()
+        )
+      );
+  };
+
+  const getIsOver = () => {
+    return isOver;
+  };
+
+  const reset = () => {
+    round = 1;
+    isOver = false;
+  };
+
+  return { playRound, getIsOver, reset };
 })();

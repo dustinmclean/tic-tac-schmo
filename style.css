@@ -1,8 +1,33 @@
+/* Fonts */
+
+/* Setting Up Fonts */
+@font-face {
+    font-family: "Swell";
+    font-weight: 800;
+    src: url("./fonts/Swell-Regular.otf") format("otf")
+}
+
+@font-face {
+    font-family: "PT Mono";
+    font-weight: 300;
+    src: url("./fonts/PT-Mono.ttf") format("ttf")
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    src: url("./fonts/SourceSansPro-Bold.ttf") format("ttf")
+}
+
+/* Delcaring CSS Variables */
+
 :root {
     --main-background-color: #e8e8dd;
     --background-color: #2d231f;
     --yellow: #efc91a;
     --red: #e32933;
+    --button-hover: #ccccc2;
+    --button-active: #9e9d90;
 }
 
 /* Box sizing rules */
@@ -26,8 +51,27 @@ dd {
   margin: 0;
 }
 
+/* Setting Font Weights */
+
+h1 {
+    font-family: "Swell";
+    font-weight: 800;
+
+}
+
+h2 {
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+}
+
+/* Global Styles */
 body {
     color: var(--main-background-color)
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 .primary-background {
@@ -48,6 +92,182 @@ body {
 
 }
 
+button {
+    cursor: pointer;
+}
+
+/* Coloured Band On Left Side */
+
+.left-side {
+    display: flex;
+    justify-content: center;
+}
+
+.band-yellow {
+    background-color: var(--yellow);
+    height: 100%;
+    width: 40px;
+    margin-left: 4rem;
+}
+
+.band-red {
+    background-color: var(--red);
+    height: 100%;
+    width: 40px;
+}
+
+.band-white1 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 10px;
+    margin-left: 10px;
+}
+
+.band-white2 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 8px;
+    margin-left: 10px;;
+}
+
+.band-white3 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 6px;
+    margin-left: 10px;;
+}
+
+.band-white4 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 4px;
+    margin-left: 10px;;
+}
+.band-white5 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 3px;
+    margin-left: 10px;;
+}
+
+.band-white6 {
+    background-color: var(--main-background-color);
+    height: 100%;
+    width: 1px;
+    margin-left: 10px;;
+}
+
+/* Main Layout On Right Side */
+
 .right-side {
     justify-self: center;
+}
+
+.header {
+    margin-top: 5.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 4rem;
+    letter-spacing: 2px;
+}
+
+.title-band1 {
+    background-color: var(--red);
+    height: 8px;
+    width: 25.5rem;
+}
+
+.title-band2 {
+    background-color: var(--red);
+    height: 6px;
+    width: 25.5rem;
+    margin-top: 3px;
+}
+
+.title-band3 {
+    background-color: var(--red);
+    height: 4px;
+    width: 25.5rem;
+    margin-top: 3px;
+}
+
+.title-band4 {
+    background-color: var(--red);
+    height: 2px;
+    width: 25.5rem;
+    margin-top: 3px;
+}
+
+.title-band5 {
+    background-color: var(--red);
+    height: 1px;
+    width: 25.5rem;
+    margin-top: 3px;
+    margin-bottom: 2rem;
+}
+
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -1rem;
+}
+
+.arrow {
+    height: 40px;
+    width: auto;
+    margin-right: 2.5rem;
+}
+
+.message {
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+
+}
+
+/* Button Styling*/
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.restart-button {
+    margin-top: 3rem;
+    border: none;
+    background-color: var(--main-background-color);
+    color: var(--background-color);
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.restart-button:hover {
+    transition: 0.3s ease;
+    background-color: var(--button-hover);
+    
+}
+
+.restart-button:active {
+    background-color: var(--button-active);
+}
+
+/* Footer */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 3.5rem;
+    margin-left: 2rem;
+    font-family: "PT Mono";
+    font-weight: 300;
+
 }
