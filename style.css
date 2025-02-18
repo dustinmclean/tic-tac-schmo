@@ -215,6 +215,7 @@ button {
     justify-content: center;
     align-items: center;
     margin-left: -1rem;
+    margin-bottom: 2rem;
 }
 
 .arrow {
@@ -229,6 +230,25 @@ button {
     font-size: 2rem;
     text-align: center;
 
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 2px solid var(--main-background-color)
+    
+}
+
+.field {
+    width: 150px;
+    height: 150px;
+    border: 2px solid var(--main-background-color);
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    font-size: 6.7rem;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 
 /* Button Styling*/

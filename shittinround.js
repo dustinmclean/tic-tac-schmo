@@ -2,29 +2,62 @@ function Player(sign) {
   const getSign = () => {
     return sign;
   };
-  return { getSign };
+  return { getSign }
 }
 
-// remember, when doing IIFEs, always use the const or let syntax, instead of regular function keyword:
+// --------------------------------------------------
 
 const gameBoard = (() => {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  const boardCells = ["", "", "", "", "", "", "", "", ""];
 
-  const setField = (index, sign) => {
-    if (index > board.length) return;
-    board[index] = sign;
-  };
+  const setField = (sign, index) => {
+    if (index > boardCells.length) return;
+    boardCells[index] = sign;
+  }
 
   const getField = (index) => {
-    if (index > board.length) return;
-    return board[index];
-  };
+    if (index > boardCells.length) return;
+    return boardCells[index];
+  }
 
-  const reset = () => {
-    for (let i = 0; i < board.length; i++) {
-      board[i] = "";
+  const resetBoard = () => {
+    for (let i = 0; i < boardCells.length; i++) {
+      boardCells[i] = ""
     }
-  };
+  }
 
-  return { setField, getField, reset };
+  return { setField, getField, resetBoard };
+
+
 })();
+
+// -------------------------------------------------------
+
+
+
+const diplayController = (() => {
+  const fieldElements = document.querySelectorAll(".field-elements");
+  const messageElement = document.getElementById("message");
+  const restartButton = document.getElementById("restart-button");
+
+ // Now the biiiiig ol event listener: this thing is god damn key to this whole thing thang thong: 
+
+ fieldElements.forEach((cell) => {
+  cell.addEventListener("click", (e) => {
+
+    if (gameController.getIsOver() || e.target.textContent !== "") return;
+
+    gameController.playRound(parseInt(e.target.dataset.index))
+
+    const updateGameBoard = () => {
+      fieldElements.forEach((cell, index) => {
+        cell.textContent = gameBoard.setField(index)
+      });
+    };
+  });
+ });
+})();
+
+
+
+// -------------------------------------------------------------
